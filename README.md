@@ -1,0 +1,1 @@
+# sztv-fogadoora-tolto

@@ -4,17 +4,18 @@ import datetime
 
 
 FONT_LENGTH = 9
-FONT_SIZE = 27
-START_FIRST_COLUMN_X = 80
-START_FIRST_COLUMN_Y = 165
+FONT_SIZE = 26
+START_FIRST_COLUMN_X = 60
+START_FIRST_COLUMN_Y = 155
 LINE_HEIGHT = 33
 START_SECOND_COLUMN_X = 850
-START_SECOND_COLUMN_Y = 165
-OFFSET = 40
-MAX_WIDTH = 680
+START_SECOND_COLUMN_Y = 155
+OFFSET = 33
+MAX_WIDTH = 700
 FONT = "fonts/DINNextLTPro-Condensed1.ttf"
 FONT_BOLD = "fonts/DINNextLTPro-BoldCondensed1.ttf"
 COLOR = (50, 50, 50)
+MAKES_TITLE_BOLD = True
 
 def getTitle(text):
     words = text.split(" ")
@@ -57,7 +58,7 @@ def parse_txt(filename):
         array.append({
             "text": line,
             "type": "p",
-            "title": getTitle(line),
+            "title": getTitle(line) if MAKES_TITLE_BOLD else "",
             "separator": False
         })
     return array
@@ -124,7 +125,7 @@ def wrap_text(text, font, max_width):
 
     return "\n".join(lines), len(lines)
 
-PNG_INPUT = "varoshaza_fogadoora_1600x900_251017.png"
+PNG_INPUT = "template/varoshaza_fogadoora_1600x900_251017.png"
 PNG_OUTPUT = "fogadoora_FROM_PNG.png"
 
 cover_boxes = [
@@ -216,7 +217,7 @@ def create_png(new_texts, output=PNG_OUTPUT, run_count=0):
         # Save the final image
         img.save(f"{output}.png")
         print(f"Kész! Az új kép elmentve ide: {output}")
-    return new_texts[i:] if i != len(new_texts)-1 else []
+    return new_texts[i+1:] if i != len(new_texts)-1 else []
 
 
 def main():
